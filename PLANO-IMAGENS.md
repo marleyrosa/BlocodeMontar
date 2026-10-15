@@ -32,10 +32,19 @@ flowchart LR
 | Fonte | Uso | Motivo |
 | --- | --- | --- |
 | **AliExpress e CJ Dropshipping** | **Fonte principal das fotos** | São os anúncios do fabricante. Revendedores podem usar as fotos. É de lá que você compra. |
+| **Minha loja no Mercado Livre** | **Fonte permitida** | Só as fotos próprias: tiradas por você, artes suas ou fotos do fornecedor que você pode usar. |
 | **Amazon** | Só para pesquisa de preço e de nomes | As fotos dos anúncios são dos vendedores. Não baixe. |
-| **Mercado Livre** | Só para pesquisa de preço e de concorrência | As fotos são dos vendedores. Não baixe. |
+| **Mercado Livre (outros vendedores)** | Só para pesquisa de preço e de concorrência | As fotos são dos vendedores. Não baixe. |
 
 Se a mesma foto do fabricante aparecer na Amazon ou no Mercado Livre, baixe pelo anúncio do fabricante no AliExpress.
+
+### Fotos da minha loja no Mercado Livre
+
+1. Use os arquivos originais do computador ou do celular. As fotos baixadas do anúncio vêm comprimidas.
+2. Não use fotos copiadas de outros vendedores.
+3. Tire selos, textos ("Frete grátis", "Full"), marcas d'água e o nome da loja do Mercado Livre.
+4. Combine por escrito com o cliente que ele pode usar essas fotos na loja BlocodeMontar.
+5. Salve na subpasta do produto no Drive e marque `importado` na coluna `status` do CSV.
 
 ## Etapa 1: preparar o VS Code (uma vez)
 
@@ -104,5 +113,5 @@ Combine com o cliente como ele quer tratar isso: por exemplo, usar nomes descrit
 - [ ] Fornecedor encontrado para cada modelo (coluna `status`)
 - [ ] Fotos do fornecedor salvas no Drive
 - [ ] Fotos tratadas no Canva (`-final.jpg`)
-- [ ] Nenhuma imagem baixada do blocobox.com, da Amazon ou do Mercado Livre
+- [ ] Nenhuma imagem baixada do blocobox.com, da Amazon ou de outros vendedores do Mercado Livre
 - [ ] Produtos importados e com fotos na Shopify
