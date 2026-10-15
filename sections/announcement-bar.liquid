@@ -1,0 +1,144 @@
+<div class="announcement full-width" style="--speed: {{ section.settings.speed }}s">
+  <div class="announcement__track">
+    {%- for i in (1..2) -%}
+      <ul class="announcement__list" {% if i == 2 %}aria-hidden="true"{% endif %}>
+        {%- for block in section.blocks -%}
+          <li class="announcement__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != 'none' -%}
+              {% render 'icon', name: block.settings.icon %}
+            {%- endif -%}
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+            {%- else -%}
+              <span>{{ block.settings.text }}</span>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .announcement {
+    overflow: hidden;
+    background: var(--color-foreground);
+    color: var(--color-background);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .announcement__track {
+    display: flex;
+    width: max-content;
+    animation: announcement-scroll var(--speed) linear infinite;
+  }
+
+  .announcement:hover .announcement__track {
+    animation-play-state: paused;
+  }
+
+  .announcement__list {
+    display: flex;
+    gap: 3rem;
+    padding: 0.55rem 1.5rem;
+    list-style: none;
+  }
+
+  .announcement__item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+  }
+
+  .announcement__item .icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-primary);
+  }
+
+  .announcement a {
+    text-decoration: none;
+  }
+
+  @keyframes announcement-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .announcement__track {
+      animation: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Barra de avisos",
+  "class": "section-announcement",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Duração de uma volta",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "s",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Mensagem",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "10% de desconto no Pix"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícone",
+          "default": "pix",
+          "options": [
+            { "value": "none", "label": "Nenhum" },
+            { "value": "pix", "label": "Pix" },
+            { "value": "card", "label": "Cartão" },
+            { "value": "shield", "label": "Garantia" },
+            { "value": "truck", "label": "Entrega" },
+            { "value": "refresh", "label": "Troca / cashback" },
+            { "value": "gift", "label": "Presente" },
+            { "value": "star", "label": "Estrela" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de avisos",
+      "blocks": [
+        { "type": "message", "settings": { "text": "10% de desconto no Pix", "icon": "pix" } },
+        { "type": "message", "settings": { "text": "Até 6x sem juros no cartão", "icon": "card" } },
+        { "type": "message", "settings": { "text": "30 dias de garantia de satisfação", "icon": "shield" } },
+        { "type": "message", "settings": { "text": "10% de cashback na próxima compra", "icon": "refresh" } }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

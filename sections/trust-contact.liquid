@@ -1,0 +1,107 @@
+<div class="trust-contact section-spacing">
+  <div class="trust-contact__badge">
+    {%- if section.settings.badge_image -%}
+      <a href="{{ section.settings.badge_link | default: '#' }}" target="_blank" rel="noopener">
+        {{ section.settings.badge_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: section.settings.badge_title }}
+      </a>
+    {%- else -%}
+      <span class="trust-contact__seal">{% render 'icon', name: 'shield' %}</span>
+    {%- endif -%}
+    <div>
+      <h2>{{ section.settings.badge_title }}</h2>
+      <p>{{ section.settings.badge_text }}</p>
+    </div>
+  </div>
+
+  <div class="trust-contact__info">
+    <h2>{{ section.settings.contact_title }}</h2>
+    <ul>
+      {%- if settings.support_hours != blank -%}
+        <li>{% render 'icon', name: 'clock' %}{{ settings.support_hours }}</li>
+      {%- endif -%}
+      {%- if settings.whatsapp_number != blank -%}
+        <li>{% render 'icon', name: 'whatsapp' %}<a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' }}" target="_blank" rel="noopener">WhatsApp</a></li>
+      {%- endif -%}
+      {%- if settings.support_email != blank -%}
+        <li>{% render 'icon', name: 'mail' %}<a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a></li>
+      {%- endif -%}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .trust-contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .trust-contact > div {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .trust-contact h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+  }
+
+  .trust-contact__badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .trust-contact__badge img {
+    width: 7rem;
+  }
+
+  .trust-contact__seal {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--color-pix);
+    color: #fff;
+  }
+
+  .trust-contact__seal .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .trust-contact__info ul {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .trust-contact__info li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 749px) {
+    .trust-contact {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Selo e contato",
+  "settings": [
+    { "type": "image_picker", "id": "badge_image", "label": "Imagem do selo", "info": "Use o selo oficial que o Reclame Aqui libera para a sua empresa." },
+    { "type": "url", "id": "badge_link", "label": "Link do selo" },
+    { "type": "text", "id": "badge_title", "label": "Título do selo", "default": "Compra 100% segura" },
+    { "type": "text", "id": "badge_text", "label": "Texto do selo", "default": "Site protegido, pagamento seguro e atendimento de verdade." },
+    { "type": "text", "id": "contact_title", "label": "Título do contato", "default": "Atendimento" }
+  ],
+  "presets": [{ "name": "Selo e contato" }]
+}
+{% endschema %}

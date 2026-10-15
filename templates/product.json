@@ -11,10 +11,27 @@
   "sections": {
     "main": {
       "type": "product",
+      "settings": {
+        "addons_title": "Aproveite e leve junto",
+        "addon_products": ["caixa-de-presente", "organizador-de-pecas"]
+      }
+    },
+    "photos": {
+      "type": "customer-photos",
+      "blocks": {
+        "p1": { "type": "photo", "settings": {} },
+        "p2": { "type": "photo", "settings": {} },
+        "p3": { "type": "photo", "settings": {} },
+        "p4": { "type": "photo", "settings": {} },
+        "p5": { "type": "photo", "settings": {} }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5"],
+      "settings": {}
+    },
+    "related": {
+      "type": "product-recommendations",
       "settings": {}
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main", "photos", "related"]
 }

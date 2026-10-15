@@ -1,0 +1,122 @@
+{%- assign track_id = 'Slides-' | append: section.id -%}
+<div class="promo-slider section-spacing{% if section.settings.full_width %} full-width{% endif %}">
+  <div class="carousel promo-slider__track" id="{{ track_id }}" style="--carousel-item: 100%; --carousel-item-tablet: 100%; --carousel-item-mobile: 100%;">
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link | default: '#' }}" class="promo-slide" {{ block.shopify_attributes }}>
+        {%- assign loading = 'lazy' -%}
+        {%- if forloop.first -%}{%- assign loading = 'eager' -%}{%- endif -%}
+        {%- if block.settings.image -%}
+          <picture>
+            {%- if block.settings.image_mobile -%}
+              <source media="(max-width: 599px)" srcset="{{ block.settings.image_mobile | image_url: width: 800 }}">
+            {%- endif -%}
+            {{ block.settings.image | image_url: width: 2000 | image_tag: loading: loading, widths: '800, 1200, 1600, 2000', sizes: '100vw', alt: block.settings.heading }}
+          </picture>
+        {%- else -%}
+          <div class="promo-slide__placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+        {%- if block.settings.heading != blank or block.settings.button_label != blank -%}
+          <div class="promo-slide__content">
+            {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+            {%- if block.settings.button_label != blank -%}<span class="button button--primary">{{ block.settings.button_label }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 1 -%}
+    <div class="promo-slider__controls carousel-controls">
+      <button type="button" data-carousel-prev data-carousel-target="{{ track_id }}" aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'chevron-left' %}</button>
+      <button type="button" data-carousel-next data-carousel-target="{{ track_id }}" aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'chevron-right' %}</button>
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .promo-slider {
+    position: relative;
+  }
+
+  .promo-slider__track {
+    gap: 0;
+    border-radius: var(--radius);
+  }
+
+  .promo-slider.full-width .promo-slider__track {
+    border-radius: 0;
+  }
+
+  .promo-slide {
+    position: relative;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .promo-slide img,
+  .promo-slide__placeholder svg {
+    width: 100%;
+    height: auto;
+    max-height: 32rem;
+    object-fit: cover;
+  }
+
+  .promo-slide__placeholder {
+    aspect-ratio: 3 / 1;
+    background: var(--color-surface);
+  }
+
+  .promo-slide__content {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: clamp(1rem, 4vw, 3rem);
+    background: linear-gradient(transparent, rgb(0 0 0 / 0.55));
+  }
+
+  .promo-slide__content h2 {
+    font-size: clamp(1.4rem, 4vw, 2.75rem);
+  }
+
+  .promo-slider__controls {
+    position: absolute;
+    right: 1rem;
+    bottom: 3rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Banners rotativos",
+  "settings": [
+    { "type": "checkbox", "id": "full_width", "label": "Largura total da tela", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Banner",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagem (computador)", "info": "Recomendado: 2000 x 700 px" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Imagem (celular)", "info": "Recomendado: 800 x 1000 px" },
+        { "type": "text", "id": "heading", "label": "Título" },
+        { "type": "text", "id": "text", "label": "Texto" },
+        { "type": "text", "id": "button_label", "label": "Texto do botão" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banners rotativos",
+      "blocks": [
+        { "type": "slide", "settings": { "heading": "Monte sua coleção", "text": "Réplicas de Fórmula 1, veículos e muito mais", "button_label": "Ver lançamentos" } },
+        { "type": "slide", "settings": { "heading": "Modelos surpresa", "button_label": "Aproveitar" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

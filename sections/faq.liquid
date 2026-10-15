@@ -1,0 +1,85 @@
+<div class="faq section-spacing">
+  <h2 class="faq__title">{{ section.settings.title }}</h2>
+  <div class="faq__list">
+    {%- for block in section.blocks -%}
+      <details class="faq__item" {{ block.shopify_attributes }}>
+        <summary>{{ block.settings.question }} {% render 'icon', name: 'chevron-down' %}</summary>
+        <div class="faq__answer">{{ block.settings.answer }}</div>
+      </details>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .faq__title {
+    margin-bottom: 1rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    text-align: center;
+  }
+
+  .faq__list {
+    display: grid;
+    gap: 0.5rem;
+    max-width: 50rem;
+    margin-inline: auto;
+  }
+
+  .faq__item {
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__item[open] summary .icon {
+    transform: rotate(180deg);
+  }
+
+  .faq__answer {
+    padding: 0 1rem 1rem;
+    color: var(--color-foreground-muted);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Perguntas frequentes",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Tem alguma dúvida?" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Pergunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pergunta", "default": "Pergunta" },
+        { "type": "richtext", "id": "answer", "label": "Resposta", "default": "<p>Resposta</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Perguntas frequentes",
+      "blocks": [
+        { "type": "question", "settings": { "question": "O que vem na caixa?", "answer": "<p>Todas as peças do modelo, separadas em saquinhos numerados, e o manual de montagem ilustrado.</p>" } },
+        { "type": "question", "settings": { "question": "Quanto tempo demora a entrega?", "answer": "<p>O prazo aparece no carrinho depois que você informa o CEP. Você recebe o código de rastreio por e-mail.</p>" } },
+        { "type": "question", "settings": { "question": "E se faltar alguma peça?", "answer": "<p>Fale com a gente pelo WhatsApp com uma foto. Enviamos a peça de reposição sem custo.</p>" } },
+        { "type": "question", "settings": { "question": "Como funciona a garantia de satisfação?", "answer": "<p>Você tem 30 dias para pedir a troca ou a devolução, conforme a nossa política de devolução.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,39 +1,171 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+<footer class="site-footer full-width">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <a href="{{ routes.root_url }}" class="site-footer__logo">
+        {%- if settings.logo -%}
+          {{ settings.logo | image_url: width: 400 | image_tag: alt: shop.name, loading: 'lazy', style: 'width: var(--logo-width)' }}
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+      {%- if section.settings.about != blank -%}
+        <div class="site-footer__about">{{ section.settings.about }}</div>
+      {%- endif -%}
+      {% render 'social-links' %}
+    </div>
+
+    {%- for i in (1..2) -%}
+      {%- assign menu_key = 'menu_' | append: i -%}
+      {%- assign title_key = 'menu_' | append: i | append: '_title' -%}
+      {%- assign menu = section.settings[menu_key] -%}
+      {%- if menu.links.size > 0 -%}
+        <nav class="site-footer__column" aria-label="{{ section.settings[title_key] | default: menu.title | escape }}">
+          <h2>{{ section.settings[title_key] | default: menu.title }}</h2>
+          <ul>
+            {%- for link in menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <div class="site-footer__column">
+      <h2>{{ 'footer.support' | t }}</h2>
+      <ul class="site-footer__contact">
+        {%- if settings.support_hours != blank -%}
+          <li>{% render 'icon', name: 'clock' %}{{ settings.support_hours }}</li>
+        {%- endif -%}
+        {%- if settings.whatsapp_number != blank -%}
+          <li>
+            {% render 'icon', name: 'whatsapp' %}
+            <a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' }}" target="_blank" rel="noopener">WhatsApp</a>
+          </li>
+        {%- endif -%}
+        {%- if settings.support_email != blank -%}
+          <li>{% render 'icon', name: 'mail' %}<a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a></li>
+        {%- endif -%}
+      </ul>
+      {%- if section.settings.show_payment_icons -%}
+        <ul class="site-footer__payment">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
   </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+  <div class="site-footer__legal">
+    <p>
+      &copy; {{ 'now' | date: '%Y' }}
+      {{ settings.company_name | default: shop.name }}
+      {%- if settings.company_cnpj != blank %} &middot; {{ 'footer.cnpj' | t: cnpj: settings.company_cnpj }}{% endif %}
+    </p>
+    {%- if section.settings.disclaimer != blank -%}
+      <p>{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
   </div>
 </footer>
 
 {% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
+  .site-footer {
+    margin-top: 3rem;
+    background: var(--color-surface);
+    font-size: 0.9rem;
   }
-  footer a {
+
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: 2rem;
+    width: min(var(--page-width), 100%);
+    margin-inline: auto;
+    padding: 2.5rem var(--page-margin);
+  }
+
+  .site-footer__logo {
+    display: inline-block;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.4rem;
     text-decoration: none;
-    color: var(--color-foreground);
   }
-  footer .footer__links,
-  footer .footer__payment {
+
+  .site-footer__about {
+    margin-top: 0.75rem;
+    color: var(--color-foreground-muted);
+  }
+
+  .site-footer__column h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .site-footer__column ul {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer a {
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+
+  .site-footer__contact li {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .site-footer__contact .icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .site-footer .site-footer__payment {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .site-footer__payment svg {
+    width: 2.4rem;
+    height: auto;
+  }
+
+  .site-footer__legal {
+    padding: 1rem var(--page-margin) 1.5rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-foreground-muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .site-footer__legal p + p {
+    margin-top: 0.4rem;
+  }
+
+  @media (max-width: 989px) {
+    .site-footer__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .site-footer__inner {
+      grid-template-columns: 1fr;
+    }
   }
 {% endstylesheet %}
 
@@ -42,16 +174,49 @@
   "name": "t:general.footer",
   "settings": [
     {
+      "type": "richtext",
+      "id": "about",
+      "label": "Texto sobre a loja",
+      "default": "<p>Blocos de montar colecionáveis: Fórmula 1, veículos, filmes, heróis e muito mais.</p>"
+    },
+    {
+      "type": "text",
+      "id": "menu_1_title",
+      "label": "Título da coluna 1",
+      "default": "Sobre a BlocodeMontar"
+    },
+    {
       "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "id": "menu_1",
+      "label": "Menu da coluna 1",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_title",
+      "label": "Título da coluna 2",
+      "default": "Informações"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Menu da coluna 2"
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
       "label": "t:labels.show_payment_icons",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Aviso legal",
+      "default": "Produtos compatíveis, vendidos de forma independente, para fins lúdicos e educativos. As marcas citadas pertencem aos seus respectivos donos."
     }
-  ]
+  ],
+  "enabled_on": {
+    "groups": ["footer"]
+  }
 }
 {% endschema %}

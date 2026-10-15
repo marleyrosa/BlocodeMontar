@@ -115,3 +115,186 @@ body {
 .shopify-section > .full-width {
   grid-column: 1 / -1;
 }
+
+/** BlocodeMontar global styles */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  width: auto;
+  height: auto;
+  clip: auto;
+  padding: 0.5rem 1rem;
+  background: var(--color-background);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.6rem 1.25rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-button);
+  color: var(--color-button-text);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.button:hover {
+  opacity: 0.88;
+}
+
+.button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.button--primary {
+  background: var(--color-primary);
+  color: var(--color-primary-text);
+}
+
+.button--whatsapp {
+  background: #25d366;
+  color: #fff;
+}
+
+.button--outline {
+  background: transparent;
+  color: var(--color-foreground);
+  box-shadow: inset 0 0 0 2px currentcolor;
+}
+
+.button--full {
+  width: 100%;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.section-spacing {
+  padding-block: 2rem;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-heading h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.section-heading a {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Horizontal carousel used by product and collection rows */
+.carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--carousel-item, calc((100% - 3 * 1rem) / 4));
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel > * {
+  scroll-snap-align: start;
+}
+
+@media (max-width: 989px) {
+  .carousel {
+    grid-auto-columns: var(--carousel-item-tablet, calc((100% - 2 * 1rem) / 2.4));
+  }
+}
+
+@media (max-width: 599px) {
+  .carousel {
+    grid-auto-columns: var(--carousel-item-mobile, 70%);
+  }
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carousel-controls button {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  cursor: pointer;
+}
+
+@media (max-width: 599px) {
+  .carousel-controls {
+    display: none;
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 989px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}

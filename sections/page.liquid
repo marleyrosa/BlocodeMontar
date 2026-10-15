@@ -5,9 +5,29 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/page
 {% endcomment %}
 
-<h1>{{ page.title }}</h1>
+<div class="page section-spacing">
+  <h1>{{ page.title }}</h1>
+  <div class="page__content">{{ page.content }}</div>
+</div>
 
-{{ page.content }}
+{% stylesheet %}
+  .page {
+    max-width: 50rem;
+    margin-inline: auto;
+  }
+
+  .page h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  .page__content {
+    line-height: 1.7;
+  }
+
+  .page__content > * + * {
+    margin-top: 1rem;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

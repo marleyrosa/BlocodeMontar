@@ -1,0 +1,89 @@
+{% doc %}
+  Renders the price block with the compare-at price, the Pix price and the
+  interest-free installment price. The Pix discount and the number of
+  installments come from the theme settings.
+
+  @param {object} product - The product
+  @param {object} [variant] - The variant to price. Defaults to the selected or first available variant
+  @param {string} [size] - 'small' for product cards, 'large' for the product page
+
+  @example
+  {% render 'price', product: product, size: 'small' %}
+{% enddoc %}
+
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign price = target.price
+  assign compare = target.compare_at_price
+  assign pix_factor = 100 | minus: settings.pix_discount
+  assign pix_price = price | times: pix_factor | divided_by: 100
+  assign installments = settings.installments | at_least: 1
+  assign installment_price = price | divided_by: installments | money
+-%}
+
+<div class="price price--{{ size | default: 'small' }}" data-price>
+  {%- if compare > price -%}
+    <s class="price__compare" data-price-compare>{{ compare | money }}</s>
+  {%- endif -%}
+
+  {%- if settings.pix_discount > 0 -%}
+    <span class="price__pix" data-price-pix>
+      <strong>{{ pix_price | money }}</strong>
+      {{ 'products.price.on_pix' | t }}
+    </span>
+    <span class="price__regular" data-price-regular>
+      {{ 'products.price.or' | t }}
+      <strong>{{ price | money }}</strong>
+    </span>
+  {%- else -%}
+    <span class="price__pix" data-price-pix><strong>{{ price | money }}</strong></span>
+  {%- endif -%}
+
+  {%- if installments > 1 -%}
+    <span class="price__installments" data-price-installments>
+      {{ 'products.price.installments_html' | t: count: installments, amount: installment_price }}
+    </span>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    line-height: 1.35;
+  }
+
+  .price__compare {
+    font-size: 0.8rem;
+    color: var(--color-foreground-muted);
+  }
+
+  .price__pix {
+    color: var(--color-pix);
+    font-size: 0.85rem;
+  }
+
+  .price__pix strong {
+    font-size: 1.15rem;
+  }
+
+  .price__regular,
+  .price__installments {
+    font-size: 0.8rem;
+    color: var(--color-foreground-muted);
+  }
+
+  .price--large .price__compare {
+    font-size: 1rem;
+  }
+
+  .price--large .price__pix strong {
+    font-size: 2rem;
+  }
+
+  .price--large .price__regular,
+  .price--large .price__installments {
+    font-size: 0.95rem;
+  }
+{% endstylesheet %}

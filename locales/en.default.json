@@ -17,7 +17,12 @@
     "checkout": "Checkout",
     "title": "Cart",
     "update": "Update",
-    "remove": "Remove"
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "pix_total": "Total with Pix ({{ discount }}% off)",
+    "coupon_note": "Enter your discount code at checkout.",
+    "continue": "Continue shopping",
+    "empty": "Your cart is empty."
   },
   "customers": {
     "login": {
@@ -28,7 +33,12 @@
     }
   },
   "collections": {
-    "title": "Collections"
+    "title": "Collections",
+    "products_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "sort_by": "Sort by"
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",
@@ -48,5 +58,78 @@
     "submit": "Search",
     "no_results_html": "No results found for {{ terms }}",
     "results_for_html": "{{ count }} results found for {{ terms }}"
+  },
+  "general": {
+    "skip_to_content": "Skip to content",
+    "whatsapp_contact": "Chat on WhatsApp",
+    "previous": "Previous",
+    "next": "Next",
+    "view_all": "View all"
+  },
+  "header": {
+    "menu": "Menu",
+    "close": "Close",
+    "see_all": "See all {{ title }}",
+    "search": "Search",
+    "search_placeholder": "What are you looking for?",
+    "account": "Account",
+    "cart": "Cart"
+  },
+  "footer": {
+    "support": "Customer support",
+    "cnpj": "Company ID {{ cnpj }}"
+  },
+  "products": {
+    "price": {
+      "on_pix": "with Pix",
+      "or": "or",
+      "installments_html": "or {{ count }}x of <strong>{{ amount }}</strong> interest-free",
+      "installments_js": "or {{ count }}x of {{ amount }} interest-free"
+    },
+    "sold_out": "Sold out",
+    "add": "Add",
+    "choose_options": "Choose options",
+    "add_to_cart": "Add to cart",
+    "unavailable": "Unavailable",
+    "specs": {
+      "pieces_count": {
+        "one": "{{ count }} piece",
+        "other": "{{ count }} pieces"
+      },
+      "pieces": "Pieces",
+      "scale": "Scale",
+      "size": "Size",
+      "sku": "SKU"
+    },
+    "empty_collection": "Add products to this collection to show them here.",
+    "whatsapp_message": "Hi! I have a question about {{ title }} (SKU {{ sku }}): {{ url }}",
+    "whatsapp_button": "Questions? Chat on WhatsApp",
+    "media_label": "Show image {{ index }}",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "trust": {
+      "pix": "{{ discount }}% off with Pix",
+      "installments": "Up to {{ count }}x interest-free",
+      "guarantee": "30-day satisfaction guarantee",
+      "tracking": "Tracked delivery"
+    },
+    "tabs": {
+      "description": "Description",
+      "specs": "Model specifications",
+      "mechanics": "Mechanics"
+    },
+    "rating": "{{ rating }} out of 5 stars"
+  },
+  "newsletter": {
+    "success": "Thanks for subscribing!",
+    "email": "Your email",
+    "subscribe": "Subscribe"
+  },
+  "tracking": {
+    "code": "Tracking code",
+    "code_placeholder": "Example: NL123456789BR",
+    "submit": "Track",
+    "account_html": "Have an account? <a href=\"{{ url }}\">See your orders</a>."
   }
 }

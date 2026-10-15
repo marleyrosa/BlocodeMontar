@@ -14,12 +14,12 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
+        "menu_1": "footer",
+        "menu_1_title": "Sobre a BlocodeMontar",
+        "menu_2_title": "Informações",
         "show_payment_icons": true
       }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }

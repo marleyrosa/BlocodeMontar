@@ -1,0 +1,135 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "Página não encontrada.",
+    "back_to_shopping": "Voltar para a loja"
+  },
+  "blog": {
+    "article_comments": "Comentários",
+    "article_metadata_html": "{{ date }} por {{ author }}",
+    "comment_form_body": "Comentário",
+    "comment_form_email": "E-mail",
+    "comment_form_name": "Nome",
+    "comment_form_submit": "Publicar",
+    "comment_form_title": "Deixe um comentário"
+  },
+  "cart": {
+    "checkout": "Finalizar compra",
+    "title": "Carrinho",
+    "update": "Atualizar",
+    "remove": "Remover",
+    "subtotal": "Subtotal",
+    "pix_total": "Total no Pix ({{ discount }}% off)",
+    "coupon_note": "Tem cupom? Aplique na próxima etapa, no checkout.",
+    "continue": "Continuar comprando",
+    "empty": "Seu carrinho está vazio."
+  },
+  "customers": {
+    "login": {
+      "email": "E-mail",
+      "password": "Senha",
+      "submit": "Entrar",
+      "title": "Entrar"
+    }
+  },
+  "collections": {
+    "title": "Coleções",
+    "products_count": {
+      "one": "{{ count }} produto",
+      "other": "{{ count }} produtos"
+    },
+    "sort_by": "Ordenar por"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Adicionar à Apple Wallet",
+    "card": "Vale-presente",
+    "expired": "Este vale-presente expirou",
+    "expires_on": "Válido até {{ expires_on }}",
+    "use_at_checkout": "Use este vale-presente no checkout"
+  },
+  "password": {
+    "title": "Loja em construção",
+    "password": "Senha",
+    "enter": "Entrar"
+  },
+  "search": {
+    "title": "Busca",
+    "placeholder": "Buscar produtos",
+    "submit": "Buscar",
+    "no_results_html": "Nenhum resultado para {{ terms }}",
+    "results_for_html": "{{ count }} resultados para {{ terms }}"
+  },
+  "general": {
+    "skip_to_content": "Pular para o conteúdo",
+    "whatsapp_contact": "Fale com a gente no WhatsApp",
+    "previous": "Anterior",
+    "next": "Próximo",
+    "view_all": "Ver todos"
+  },
+  "header": {
+    "menu": "Menu",
+    "close": "Fechar",
+    "see_all": "Ver tudo em {{ title }}",
+    "search": "Buscar",
+    "search_placeholder": "O que você procura?",
+    "account": "Minha conta",
+    "cart": "Carrinho"
+  },
+  "footer": {
+    "support": "Atendimento",
+    "cnpj": "CNPJ {{ cnpj }}"
+  },
+  "products": {
+    "price": {
+      "on_pix": "no Pix",
+      "or": "ou",
+      "installments_html": "ou {{ count }}x de <strong>{{ amount }}</strong> sem juros",
+      "installments_js": "ou {{ count }}x de {{ amount }} sem juros"
+    },
+    "sold_out": "Esgotado",
+    "add": "Adicionar",
+    "choose_options": "Escolher opção",
+    "add_to_cart": "Adicionar ao carrinho",
+    "unavailable": "Indisponível",
+    "specs": {
+      "pieces_count": {
+        "one": "{{ count }} peça",
+        "other": "{{ count }} peças"
+      },
+      "pieces": "Peças",
+      "scale": "Escala",
+      "size": "Dimensões",
+      "sku": "Código (SKU)"
+    },
+    "empty_collection": "Adicione produtos a esta coleção para eles aparecerem aqui.",
+    "whatsapp_message": "Olá! Tenho uma dúvida sobre o {{ title }} (SKU {{ sku }}): {{ url }}",
+    "whatsapp_button": "Dúvidas? Fale no WhatsApp",
+    "media_label": "Ver imagem {{ index }}",
+    "quantity": "Quantidade",
+    "decrease": "Diminuir quantidade",
+    "increase": "Aumentar quantidade",
+    "trust": {
+      "pix": "{{ discount }}% de desconto no Pix",
+      "installments": "Até {{ count }}x sem juros",
+      "guarantee": "30 dias de garantia de satisfação",
+      "tracking": "Entrega com rastreio"
+    },
+    "tabs": {
+      "description": "Descrição",
+      "specs": "Especificações do modelo",
+      "mechanics": "Mecânica"
+    },
+    "rating": "{{ rating }} de 5 estrelas"
+  },
+  "newsletter": {
+    "success": "Cadastro feito! Fique de olho no seu e-mail.",
+    "email": "Seu e-mail",
+    "subscribe": "Quero receber"
+  },
+  "tracking": {
+    "code": "Código de rastreio",
+    "code_placeholder": "Exemplo: NL123456789BR",
+    "submit": "Rastrear",
+    "account_html": "Tem cadastro? <a href=\"{{ url }}\">Veja seus pedidos</a>."
+  }
+}

@@ -1,0 +1,107 @@
+{%- assign track_id = 'Photos-' | append: section.id -%}
+<div class="customer-photos section-spacing">
+  <div class="section-heading">
+    <div>
+      <h2>{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}<p class="customer-photos__text">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <div class="carousel-controls">
+      <button type="button" data-carousel-prev data-carousel-target="{{ track_id }}" aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'chevron-left' %}</button>
+      <button type="button" data-carousel-next data-carousel-target="{{ track_id }}" aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'chevron-right' %}</button>
+    </div>
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == '@app' -%}
+      {% render block %}
+    {%- endif -%}
+  {%- endfor -%}
+
+  <div class="carousel" id="{{ track_id }}" style="--carousel-item: calc((100% - 4 * 1rem) / 5); --carousel-item-mobile: 60%;">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'photo' -%}
+        <figure class="customer-photo" {{ block.shopify_attributes }}>
+          {%- if block.settings.image -%}
+            {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', widths: '250, 500', sizes: '(min-width: 990px) 20vw, 60vw' }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag }}
+          {%- endif -%}
+          <figcaption>
+            <span class="customer-photo__stars" aria-label="{{ 'products.rating' | t: rating: block.settings.rating }}">
+              {%- for i in (1..block.settings.rating) -%}{% render 'icon', name: 'star' %}{%- endfor -%}
+            </span>
+            {%- if block.settings.quote != blank -%}<span>{{ block.settings.quote }}</span>{%- endif -%}
+            {%- if block.settings.author != blank -%}<strong>{{ block.settings.author }}</strong>{%- endif -%}
+          </figcaption>
+        </figure>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .customer-photos__text {
+    color: var(--color-foreground-muted);
+  }
+
+  .customer-photo {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .customer-photo img,
+  .customer-photo svg {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .customer-photo figcaption {
+    display: grid;
+    gap: 0.3rem;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .customer-photo__stars {
+    display: flex;
+    color: var(--color-primary);
+  }
+
+  .customer-photo__stars .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Fotos de clientes",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Quem comprou, montou" },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Fotos reais enviadas pelos nossos clientes" }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "photo",
+      "name": "Foto de cliente",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto" },
+        { "type": "range", "id": "rating", "label": "Estrelas", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "quote", "label": "Comentário" },
+        { "type": "text", "id": "author", "label": "Nome do cliente" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fotos de clientes",
+      "blocks": [{ "type": "photo" }, { "type": "photo" }, { "type": "photo" }, { "type": "photo" }, { "type": "photo" }]
+    }
+  ]
+}
+{% endschema %}

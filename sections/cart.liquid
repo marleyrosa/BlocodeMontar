@@ -5,29 +5,183 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
 {% endcomment %}
 
-<h1>{{ 'cart.title' | t }}</h1>
+{%- liquid
+  assign pix_factor = 100 | minus: settings.pix_discount
+  assign pix_total = cart.total_price | times: pix_factor | divided_by: 100
+  assign installments = settings.installments | at_least: 1
+  assign installment_total = cart.total_price | divided_by: installments | money
+-%}
 
-<form action="{{ routes.cart_url }}" method="post">
-  <table>
-    {% for item in cart.items %}
-      <tr>
-        <td>
-          {% render 'image', image: item.image, url: item.url %}
-        </td>
-        <td>
-          <p>{{ item.product.title }}</p>
-          {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-        </td>
-        <td>
-          <input type="text" name="updates[]" value="{{ item.quantity }}">
-          <input type="submit" value="{{ 'cart.update' | t }}">
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
+<div class="cart section-spacing">
+  <h1>{{ 'cart.title' | t }}</h1>
 
-  <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
-</form>
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart__layout">
+      <ul class="cart__items">
+        {%- for item in cart.items -%}
+          <li class="cart-item">
+            <a href="{{ item.url }}" class="cart-item__image">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy' }}
+              {%- endif -%}
+            </a>
+            <div class="cart-item__info">
+              <a href="{{ item.url }}"><strong>{{ item.product.title | escape }}</strong></a>
+              {%- unless item.product.has_only_default_variant -%}
+                <small>{{ item.variant.title }}</small>
+              {%- endunless -%}
+              <span>{{ item.final_price | money }}</span>
+              <a href="{{ item.url_to_remove }}" class="cart-item__remove">{{ 'cart.remove' | t }}</a>
+            </div>
+            <label class="cart-item__qty">
+              <span class="visually-hidden">{{ 'products.quantity' | t }}</span>
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" onchange="this.form.submit()">
+            </label>
+            <strong class="cart-item__total">{{ item.final_line_price | money }}</strong>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <aside class="cart__summary">
+        <div class="cart__row">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <strong>{{ cart.total_price | money }}</strong>
+        </div>
+        {%- if settings.pix_discount > 0 -%}
+          <div class="cart__row cart__row--pix">
+            <span>{{ 'cart.pix_total' | t: discount: settings.pix_discount }}</span>
+            <strong>{{ pix_total | money }}</strong>
+          </div>
+        {%- endif -%}
+        {%- if installments > 1 -%}
+          <p class="cart__note">{{ 'products.price.installments_html' | t: count: installments, amount: installment_total }}</p>
+        {%- endif -%}
+        <p class="cart__note">{{ 'cart.coupon_note' | t }}</p>
+        <button type="submit" name="checkout" class="button button--primary button--full">{{ 'cart.checkout' | t }}</button>
+        <noscript><button type="submit" class="button button--outline button--full">{{ 'cart.update' | t }}</button></noscript>
+        <a href="{{ routes.all_products_collection_url }}" class="cart__continue">{{ 'cart.continue' | t }}</a>
+      </aside>
+    </form>
+  {%- else -%}
+    <div class="cart__empty">
+      <p>{{ 'cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button button--primary">{{ 'cart.continue' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .cart h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  .cart__layout {
+    display: grid;
+    grid-template-columns: 1fr 22rem;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .cart__items {
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cart-item__image {
+    aspect-ratio: 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .cart-item__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .cart-item__info {
+    display: grid;
+    gap: 0.2rem;
+    font-size: 0.9rem;
+  }
+
+  .cart-item__info a {
+    text-decoration: none;
+  }
+
+  .cart-item__remove {
+    font-size: 0.8rem;
+    color: var(--color-foreground-muted);
+  }
+
+  .cart-item__qty input {
+    width: 4rem;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .cart__summary {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .cart__row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart__row--pix {
+    color: var(--color-pix);
+  }
+
+  .cart__note {
+    font-size: 0.85rem;
+    color: var(--color-foreground-muted);
+  }
+
+  .cart__continue {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .cart__empty {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    padding: 3rem 0;
+  }
+
+  @media (max-width: 989px) {
+    .cart__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .cart-item {
+      grid-template-columns: 4.5rem 1fr auto;
+    }
+
+    .cart-item__total {
+      grid-column: 2 / -1;
+      justify-self: end;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

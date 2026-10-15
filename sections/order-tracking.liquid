@@ -1,0 +1,106 @@
+<div class="order-tracking section-spacing">
+  <div class="order-tracking__card">
+    <span class="order-tracking__icon">{% render 'icon', name: 'truck' %}</span>
+    <h1>{{ page.title | default: section.settings.title }}</h1>
+    <p>{{ section.settings.text }}</p>
+
+    <form class="order-tracking__form" data-tracking-form data-tracking-url="{{ section.settings.tracking_url }}">
+      <label for="TrackingCode" class="visually-hidden">{{ 'tracking.code' | t }}</label>
+      <input id="TrackingCode" type="text" name="code" required placeholder="{{ 'tracking.code_placeholder' | t }}" autocomplete="off">
+      <button type="submit" class="button button--primary">{{ 'tracking.submit' | t }}</button>
+    </form>
+
+    {%- if shop.customer_accounts_enabled -%}
+      <p class="order-tracking__account">
+        {{ 'tracking.account_html' | t: url: routes.account_url }}
+      </p>
+    {%- endif -%}
+
+    {%- if page.content != blank -%}
+      <div class="order-tracking__content">{{ page.content }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .order-tracking__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    text-align: center;
+  }
+
+  .order-tracking__icon {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-primary-text);
+  }
+
+  .order-tracking__icon .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .order-tracking__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .order-tracking__form input {
+    flex: 1;
+    min-width: 12rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--color-border);
+    text-transform: uppercase;
+  }
+
+  .order-tracking__account,
+  .order-tracking__content {
+    font-size: 0.9rem;
+    color: var(--color-foreground-muted);
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('[data-tracking-form]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const code = form.elements.code.value.trim().toUpperCase();
+      if (!code) return;
+      const url = form.dataset.trackingUrl.replace('{codigo}', encodeURIComponent(code));
+      window.open(url, '_blank', 'noopener');
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Rastrear pedido",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Rastrear pedido" },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Digite o código de rastreio que enviamos para o seu e-mail." },
+    {
+      "type": "text",
+      "id": "tracking_url",
+      "label": "Endereço do rastreador",
+      "default": "https://t.17track.net/pt#nums={codigo}",
+      "info": "Use {codigo} no lugar do código de rastreio."
+    }
+  ],
+  "enabled_on": {
+    "templates": ["page"]
+  }
+}
+{% endschema %}

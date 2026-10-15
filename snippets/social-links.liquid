@@ -1,0 +1,51 @@
+{% doc %}
+  Renders the social network icons set in the theme settings, plus WhatsApp.
+
+  @example
+  {% render 'social-links' %}
+{% enddoc %}
+
+{%- liquid
+  assign networks = 'instagram,tiktok,threads,facebook,youtube' | split: ','
+-%}
+
+<ul class="social-links">
+  {%- for network in networks -%}
+    {%- assign key = 'social_' | append: network -%}
+    {%- if settings[key] != blank -%}
+      <li>
+        <a href="{{ settings[key] }}" target="_blank" rel="noopener" aria-label="{{ network | capitalize }}">
+          {% render 'icon', name: network %}
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if settings.whatsapp_number != blank -%}
+    <li>
+      <a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' }}" target="_blank" rel="noopener" aria-label="WhatsApp">
+        {% render 'icon', name: 'whatsapp' %}
+      </a>
+    </li>
+  {%- endif -%}
+</ul>
+
+{% stylesheet %}
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    margin-top: 1rem;
+    list-style: none;
+  }
+
+  .social-links a {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--color-surface);
+    color: var(--color-foreground);
+  }
+{% endstylesheet %}

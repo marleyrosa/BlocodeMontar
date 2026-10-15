@@ -1,0 +1,18 @@
+{% doc %}
+  Adds the previous and next button behaviour to every `[data-carousel]`
+  element. Buttons point to their track with `data-carousel-target`.
+
+  @example
+  {% render 'carousel-script' %}
+{% enddoc %}
+
+{% javascript %}
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-carousel-prev], [data-carousel-next]');
+    if (!button) return;
+    const track = document.getElementById(button.dataset.carouselTarget);
+    if (!track) return;
+    const direction = button.hasAttribute('data-carousel-next') ? 1 : -1;
+    track.scrollBy({ left: direction * track.clientWidth * 0.9, behavior: 'smooth' });
+  });
+{% endjavascript %}

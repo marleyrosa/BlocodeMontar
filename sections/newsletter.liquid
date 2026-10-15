@@ -1,0 +1,77 @@
+<div class="newsletter section-spacing full-width">
+  <div class="newsletter__inner">
+    <div>
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.text }}</p>
+    </div>
+    {%- form 'customer', class: 'newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter__message">{{ 'newsletter.success' | t }}</p>
+      {%- else -%}
+        <label for="Newsletter-{{ section.id }}" class="visually-hidden">{{ 'newsletter.email' | t }}</label>
+        <input id="Newsletter-{{ section.id }}" type="email" name="contact[email]" required autocomplete="email" placeholder="{{ 'newsletter.email' | t }}">
+        <button type="submit" class="button">{{ 'newsletter.subscribe' | t }}</button>
+        {%- if form.errors -%}
+          <p class="newsletter__message">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .newsletter {
+    background: var(--color-primary);
+    color: var(--color-primary-text);
+  }
+
+  .newsletter__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    width: min(var(--page-width), 100%);
+    margin-inline: auto;
+    padding: 0 var(--page-margin);
+  }
+
+  .newsletter h2 {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .newsletter__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .newsletter__form input[type='email'] {
+    flex: 1;
+    min-width: 12rem;
+    padding: 0.7rem 1rem;
+    border: 0;
+  }
+
+  .newsletter__message {
+    width: 100%;
+    font-weight: 600;
+  }
+
+  @media (max-width: 749px) {
+    .newsletter__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Ganhe 10% na primeira compra" },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Cadastre seu e-mail e receba lançamentos e cupons exclusivos." }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

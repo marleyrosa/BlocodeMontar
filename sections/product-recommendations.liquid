@@ -1,0 +1,44 @@
+{%- assign track_id = 'Related-' | append: section.id -%}
+<div
+  class="product-recommendations section-spacing"
+  data-recommendations
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit }}&intent=related"
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="section-heading">
+      <h2>{{ section.settings.title }}</h2>
+      <div class="carousel-controls">
+        <button type="button" data-carousel-prev data-carousel-target="{{ track_id }}" aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'chevron-left' %}</button>
+        <button type="button" data-carousel-next data-carousel-target="{{ track_id }}" aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'chevron-right' %}</button>
+      </div>
+    </div>
+    <div class="carousel" id="{{ track_id }}">
+      {%- for recommendation in recommendations.products -%}
+        {% render 'product-card', product: recommendation %}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% javascript %}
+  document.querySelectorAll('[data-recommendations]').forEach(async (container) => {
+    if (container.children.length) return;
+    const response = await fetch(container.dataset.url);
+    const html = await response.text();
+    const fresh = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-recommendations]');
+    if (fresh && fresh.innerHTML.trim()) container.innerHTML = fresh.innerHTML;
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Produtos relacionados",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Você também pode gostar" },
+    { "type": "range", "id": "limit", "label": "Quantidade", "min": 4, "max": 10, "step": 1, "default": 8 }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

@@ -10,14 +10,25 @@
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
+    {%- if settings.favicon -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+    {%- endif -%}
+
     {{ content_for_header }}
   </head>
 
   <body>
+    <a class="skip-link visually-hidden" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
+
     {% sections 'header-group' %}
 
-    {{ content_for_layout }}
+    <main id="MainContent">
+      {{ content_for_layout }}
+    </main>
 
     {% sections 'footer-group' %}
+
+    {% render 'whatsapp-float' %}
+    {% render 'carousel-script' %}
   </body>
 </html>

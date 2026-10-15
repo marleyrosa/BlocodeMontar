@@ -11,12 +11,21 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "msg-pix": { "type": "message", "settings": { "text": "10% de desconto no Pix", "icon": "pix" } },
+        "msg-card": { "type": "message", "settings": { "text": "Até 6x sem juros no cartão", "icon": "card" } },
+        "msg-guarantee": { "type": "message", "settings": { "text": "30 dias de garantia de satisfação", "icon": "shield" } },
+        "msg-cashback": { "type": "message", "settings": { "text": "10% de cashback na próxima compra", "icon": "refresh" } }
+      },
+      "block_order": ["msg-pix", "msg-card", "msg-guarantee", "msg-cashback"],
+      "settings": { "speed": 30 }
+    },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": { "menu": "main-menu" }
     }
   },
-  "order": [
-    "header"
-  ],
+  "order": ["announcement", "header"]
 }

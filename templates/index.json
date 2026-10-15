@@ -9,12 +9,325 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
+    "banners": {
+      "type": "promo-slider",
+      "settings": {
+        "full_width": true
+      },
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "heading": "Monte sua coleção",
+            "text": "Réplicas de Fórmula 1, veículos e muito mais",
+            "button_label": "Ver lançamentos",
+            "link": "shopify://collections/lancamentos"
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "heading": "Comece por aqui",
+            "text": "Kits iniciantes com preço especial",
+            "button_label": "Ver kits",
+            "link": "shopify://collections/comece-sua-colecao"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2"
+      ]
+    },
+    "help": {
+      "type": "help-cards",
+      "settings": {
+        "title": "Como podemos ajudar?"
+      },
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "icon": "whatsapp",
+            "heading": "Fale com a gente",
+            "text": "Tire suas dúvidas pelo WhatsApp"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "icon": "truck",
+            "heading": "Rastrear pedido",
+            "text": "Veja onde está sua entrega",
+            "link": "/pages/rastrear-pedido"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "icon": "star",
+            "heading": "Mais vendidos",
+            "text": "Os favoritos dos colecionadores",
+            "link": "shopify://collections/mais-vendidos"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ]
+    },
+    "categories": {
+      "type": "collection-tiles",
+      "settings": {
+        "title": "Navegue por categoria"
+      },
+      "blocks": {
+        "t0": {
+          "type": "tile",
+          "settings": {
+            "collection": "formula-1",
+            "title": "Fórmula 1"
+          }
+        },
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "collection": "filmes-e-herois",
+            "title": "Filmes e heróis"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "collection": "veiculos",
+            "title": "Veículos"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "collection": "arquitetura",
+            "title": "Arquitetura"
+          }
+        },
+        "t4": {
+          "type": "tile",
+          "settings": {
+            "collection": "espacial",
+            "title": "Espacial"
+          }
+        },
+        "t5": {
+          "type": "tile",
+          "settings": {
+            "collection": "botanica",
+            "title": "Botânica"
+          }
+        },
+        "t6": {
+          "type": "tile",
+          "settings": {
+            "collection": "acessorios",
+            "title": "Acessórios"
+          }
+        }
+      },
+      "block_order": [
+        "t0",
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ]
+    },
+    "best_sellers": {
+      "type": "product-carousel",
+      "settings": {
+        "title": "Mais vendidos",
+        "collection": "mais-vendidos",
+        "limit": 12,
+        "show_view_all": true
+      }
+    },
+    "starter": {
+      "type": "product-carousel",
+      "settings": {
+        "title": "Comece sua coleção",
+        "collection": "comece-sua-colecao",
+        "limit": 12,
+        "show_view_all": true
+      }
+    },
+    "surprise": {
+      "type": "promo-slider",
+      "settings": {
+        "full_width": false
+      },
+      "blocks": {
+        "p1": {
+          "type": "slide",
+          "settings": {
+            "heading": "Modelos surpresa",
+            "text": "Descubra qual modelo vem na sua caixa",
+            "button_label": "Quero o meu",
+            "link": "shopify://collections/modelos-surpresa"
+          }
+        }
+      },
+      "block_order": [
+        "p1"
+      ]
+    },
+    "new": {
+      "type": "product-carousel",
+      "settings": {
+        "title": "Novidades da semana",
+        "collection": "lancamentos",
+        "limit": 12,
+        "show_view_all": true
+      }
+    },
+    "f1": {
+      "type": "product-carousel",
+      "settings": {
+        "title": "Fórmula 1",
+        "collection": "formula-1",
+        "limit": 12,
+        "show_view_all": true
+      }
+    },
+    "movies": {
+      "type": "product-carousel",
+      "settings": {
+        "title": "Filmes e heróis",
+        "collection": "filmes-e-herois",
+        "limit": 12,
+        "show_view_all": true
+      }
+    },
+    "vehicles": {
+      "type": "product-carousel",
+      "settings": {
+        "title": "Veículos",
+        "collection": "veiculos",
+        "limit": 12,
+        "show_view_all": true
+      }
+    },
+    "frames": {
+      "type": "product-carousel",
+      "settings": {
+        "title": "Quadros",
+        "collection": "quadros",
+        "limit": 12,
+        "show_view_all": true
+      }
+    },
+    "videos": {
+      "type": "video-products",
+      "settings": {
+        "title": "Veja montado"
+      },
+      "blocks": {
+        "v0": {
+          "type": "video",
+          "settings": {}
+        },
+        "v1": {
+          "type": "video",
+          "settings": {}
+        },
+        "v2": {
+          "type": "video",
+          "settings": {}
+        },
+        "v3": {
+          "type": "video",
+          "settings": {}
+        },
+        "v4": {
+          "type": "video",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "v0",
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "title": "Tem alguma dúvida?"
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "O que vem na caixa?",
+            "answer": "<p>Todas as peças do modelo, separadas em saquinhos numerados, e o manual de montagem ilustrado.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Quanto tempo demora a entrega?",
+            "answer": "<p>O prazo aparece no carrinho depois que você informa o CEP. Você recebe o código de rastreio por e-mail.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "E se faltar alguma peça?",
+            "answer": "<p>Fale com a gente pelo WhatsApp com uma foto. Enviamos a peça de reposição sem custo.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Como funciona a garantia de satisfação?",
+            "answer": "<p>Você tem 30 dias para pedir a troca ou a devolução, conforme a nossa política de devolução.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ]
+    },
+    "trust": {
+      "type": "trust-contact",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "banners",
+    "help",
+    "categories",
+    "best_sellers",
+    "starter",
+    "surprise",
+    "new",
+    "f1",
+    "movies",
+    "vehicles",
+    "frames",
+    "videos",
+    "faq",
+    "trust",
+    "newsletter"
   ]
 }
