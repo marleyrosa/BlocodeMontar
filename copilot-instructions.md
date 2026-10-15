@@ -4,6 +4,11 @@
 
 Use the [Shopify AI Toolkit](https://shopify.dev/docs/apps/build/ai-toolkit) for all Shopify API and platform work. If missing, install it in the agent host per that page (or `npx skills add Shopify/shopify-ai-toolkit --list` for skill-compatible hosts).
 
+## Task tracking
+
+- Read `TAREFAS.md` before you start any work. It holds the task list and the decisions for this project.
+- When you finish a task, mark its box in `TAREFAS.md` and add the date. Add new tasks to the correct phase.
+
 ## Theme Architecture
 
 **Key principles: focus on generating snippets, blocks, and sections; users may create templates using the theme editor**
