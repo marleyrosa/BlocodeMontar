@@ -40,6 +40,7 @@ Detalhes de cada assunto:
 
 - [ ] Criar as subpastas no Drive a partir do CSV
 - [ ] Achar o fornecedor de cada modelo (coluna `status` do CSV)
+- [ ] Buscar no AliExpress e Mercado Livre os 164 modelos de `midia/lista-modelos-blocobox.csv` (lista criada em 2026-10-17; as fotos do blocobox em `midia/images/` não podem ser usadas)
 - [ ] Importar os 15 primeiros produtos pelo DSers ou CJ
 - [ ] Tratar as fotos no Canva (`-final.jpg`, 1200 x 1200, menos de 300 KB)
 - [ ] Preencher peças, escala e dimensões em cada produto
