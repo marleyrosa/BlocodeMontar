@@ -1,6 +1,6 @@
 {%- assign track_id = 'Slides-' | append: section.id -%}
 <div class="promo-slider section-spacing{% if section.settings.full_width %} full-width{% endif %}">
-  <div class="carousel promo-slider__track" id="{{ track_id }}" style="--carousel-item: 100%; --carousel-item-tablet: 100%; --carousel-item-mobile: 100%;">
+  <div class="carousel promo-slider__track" id="{{ track_id }}" data-autoplay="{{ section.settings.autoplay_speed }}" style="--carousel-item: 100%; --carousel-item-tablet: 100%; --carousel-item-mobile: 100%;">
     {%- for block in section.blocks -%}
       <a href="{{ block.settings.link | default: '#' }}" class="promo-slide" {{ block.shopify_attributes }}>
         {%- assign loading = 'lazy' -%}
@@ -35,6 +35,27 @@
     </div>
   {%- endif -%}
 </div>
+
+{%- if section.blocks.size > 1 and section.settings.autoplay_speed > 0 -%}
+  <script>
+    (function () {
+      var track = document.getElementById('{{ track_id }}');
+      if (!track || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var delay = Number(track.dataset.autoplay) * 1000;
+      var paused = false;
+      var root = track.closest('.promo-slider');
+      root.addEventListener('mouseenter', function () { paused = true; });
+      root.addEventListener('mouseleave', function () { paused = false; });
+      root.addEventListener('focusin', function () { paused = true; });
+      root.addEventListener('focusout', function () { paused = false; });
+      setInterval(function () {
+        if (paused || document.hidden) return;
+        var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 5;
+        track.scrollTo({ left: atEnd ? 0 : track.scrollLeft + track.clientWidth, behavior: 'smooth' });
+      }, delay);
+    })();
+  </script>
+{%- endif -%}
 
 {% stylesheet %}
   .promo-slider {
@@ -96,7 +117,8 @@
 {
   "name": "Banners rotativos",
   "settings": [
-    { "type": "checkbox", "id": "full_width", "label": "Largura total da tela", "default": true }
+    { "type": "checkbox", "id": "full_width", "label": "Largura total da tela", "default": true },
+    { "type": "range", "id": "autoplay_speed", "label": "Trocar banner a cada (segundos, 0 = não trocar)", "min": 0, "max": 10, "step": 1, "default": 5 }
   ],
   "blocks": [
     {

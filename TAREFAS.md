@@ -57,7 +57,7 @@ Detalhes de cada assunto:
 - [ ] Segunda imagem ao passar o mouse no cartão de produto
 - [ ] Vídeos na galeria do produto
 - [ ] Vídeo toca só quando aparece na tela
-- [ ] Banners passam sozinhos a cada 5 segundos
+- [x] Banners passam sozinhos a cada 5 segundos (2026-10-17)
 
 ## Fase 6: publicação (`PUBLICACAO-LOJA.md`)
 

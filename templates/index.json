@@ -12,7 +12,8 @@
     "banners": {
       "type": "promo-slider",
       "settings": {
-        "full_width": true
+        "full_width": true,
+        "autoplay_speed": 5
       },
       "blocks": {
         "s1": {
@@ -22,10 +23,28 @@
             "alt": "Seu pedido ainda mais completo: em compras acima de R$ 499 você ganha um brinde. 10% off no Pix, 6x sem juros e 10% de cashback.",
             "link": "shopify://collections/all"
           }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "banner-hobby.jpg",
+            "alt": "Um hobby que desafia e relaxa. 10% off no Pix, 6x sem juros e 10% de cashback.",
+            "link": "shopify://collections/all"
+          }
+        },
+        "s3": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "banner-conheca.jpg",
+            "alt": "Ainda não conhece a loja? Comece montando modelos até R$ 299.",
+            "link": "shopify://collections/all"
+          }
         }
       },
       "block_order": [
-        "s1"
+        "s1",
+        "s2",
+        "s3"
       ]
     },
     "help": {
