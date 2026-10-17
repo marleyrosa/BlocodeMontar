@@ -22,7 +22,9 @@
     "pix_total": "Total no Pix ({{ discount }}% off)",
     "coupon_note": "Tem cupom? Aplique na próxima etapa, no checkout.",
     "continue": "Continuar comprando",
-    "empty": "Seu carrinho está vazio."
+    "empty": "Seu carrinho está vazio.",
+    "added": "Produto adicionado ao carrinho.",
+    "view": "Ver carrinho"
   },
   "customers": {
     "login": {

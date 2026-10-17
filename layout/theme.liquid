@@ -28,6 +28,11 @@
 
     {% sections 'footer-group' %}
 
+    {%- unless template.name == 'cart' -%}
+      {% section 'cart-drawer' %}
+      <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
+    {%- endunless -%}
+
     {% render 'whatsapp-float' %}
     {% render 'carousel-script' %}
   </body>

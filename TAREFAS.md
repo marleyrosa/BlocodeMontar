@@ -15,6 +15,7 @@ Detalhes de cada assunto:
 - [x] Repositório no GitHub e `shopify theme dev` funcionando (2026-10-15)
 - [x] Guias: loja, mídia, imagens e publicação (2026-10-15)
 - [x] Pasta "Imagens dos produtos" no Drive e lista de 32 modelos no CSV (2026-10-15)
+- [x] Carrinho lateral: "Adicionar" abre o carrinho de lado, sem sair da página (2026-10-17)
 
 ## Fase 1: dados do cliente
 

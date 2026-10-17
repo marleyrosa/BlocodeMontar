@@ -668,7 +668,12 @@
         });
         const result = await response.json();
         if (!response.ok) throw new Error(result.description || result.message);
-        window.location.href = this.data.cartUrl;
+        if (window.CartDrawer) {
+          await window.CartDrawer.open();
+          this.submit.disabled = false;
+        } else {
+          window.location.href = this.data.cartUrl;
+        }
       } catch (error) {
         this.error.textContent = error.message;
         this.error.hidden = false;

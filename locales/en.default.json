@@ -22,7 +22,9 @@
     "pix_total": "Total with Pix ({{ discount }}% off)",
     "coupon_note": "Enter your discount code at checkout.",
     "continue": "Continue shopping",
-    "empty": "Your cart is empty."
+    "empty": "Your cart is empty.",
+    "added": "Product added to your cart.",
+    "view": "View cart"
   },
   "customers": {
     "login": {
