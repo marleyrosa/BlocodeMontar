@@ -29,7 +29,7 @@ Detalhes de cada assunto:
 ## Fase 2: admin da loja (`GUIA-LOJA.md`)
 
 - [ ] Preencher as configurações do tema (logo, cores, Pix, parcelas, WhatsApp, CNPJ)
-- [ ] Criar as 12 coleções com os handles do guia
+- [ ] Criar as 12 coleções com os handles do guia (6 automáticas criadas em 2026-10-17 por tag: formula-1, veiculos, filmes-e-herois, games, mais-vendidos, lancamentos; faltam comece-sua-colecao, quadros e as outras)
 - [ ] Criar os menus `main-menu`, `footer` e "Informações"
 - [ ] Criar os 5 campos de produto (`custom.pecas`, `escala`, `dimensoes`, `especificacoes`, `mecanica`)
 - [ ] Criar os produtos "Caixa de presente" e "Organizador de peças"

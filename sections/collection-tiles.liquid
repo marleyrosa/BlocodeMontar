@@ -11,7 +11,10 @@
   <div class="carousel" id="{{ track_id }}" style="--carousel-item: calc((100% - 5 * 1rem) / 6); --carousel-item-tablet: calc((100% - 3 * 1rem) / 4); --carousel-item-mobile: 38%;">
     {%- for block in section.blocks -%}
       {%- assign tile_collection = block.settings.collection -%}
-      {%- assign tile_image = block.settings.image | default: tile_collection.featured_image -%}
+      {%- assign tile_image = block.settings.image -%}
+      {%- if tile_image == blank and block.settings.image_asset == blank -%}
+        {%- assign tile_image = tile_collection.featured_image -%}
+      {%- endif -%}
       <a href="{{ tile_collection.url | default: '#' }}" class="collection-tile" {{ block.shopify_attributes }}>
         <span class="collection-tile__media">
           {%- if tile_image -%}
@@ -74,7 +77,7 @@
       "settings": [
         { "type": "collection", "id": "collection", "label": "Coleção" },
         { "type": "image_picker", "id": "image", "label": "Imagem (opcional)", "info": "Sem imagem, usa a imagem da coleção." },
-        { "type": "text", "id": "image_asset", "label": "Imagem do tema (nome do arquivo)", "info": "Usada quando não há imagem acima nem na coleção. Ex.: categoria-formula-1.webp" },
+        { "type": "text", "id": "image_asset", "label": "Imagem do tema (nome do arquivo)", "info": "Usada quando não há imagem acima. Tem prioridade sobre a imagem da coleção. Ex.: categoria-formula-1.webp" },
         { "type": "text", "id": "title", "label": "Nome (opcional)" }
       ]
     }
