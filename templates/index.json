@@ -185,21 +185,45 @@
     "surprise": {
       "type": "promo-slider",
       "settings": {
-        "full_width": false
+        "full_width": false,
+        "autoplay_speed": 5
       },
       "blocks": {
         "p1": {
           "type": "slide",
           "settings": {
-            "heading": "Modelos surpresa",
-            "text": "Descubra qual modelo vem na sua caixa",
+            "image_asset": "surpresa-1.jpg",
+            "alt": "Modelo surpresa, edição Fórmula 1. 10% off no Pix, 6x sem juros e 10% de cashback.",
+            "link": "shopify://collections/mais-vendidos"
+          }
+        },
+        "p2": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "surpresa-2.jpg",
+            "alt": "Caixa surpresa com kits de Fórmula 1",
+            "heading": "Edição F1",
+            "text": "Modelo surpresa com um kit de Fórmula 1 na caixa",
             "button_label": "Quero o meu",
-            "link": "shopify://collections/modelos-surpresa"
+            "link": "shopify://collections/mais-vendidos"
+          }
+        },
+        "p3": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "surpresa-3.jpg",
+            "alt": "Caixa surpresa com carro, nave e Fórmula 1",
+            "heading": "Modelo surpresa",
+            "text": "Pode vir carro, nave ou Fórmula 1. Descubra ao abrir",
+            "button_label": "Quero o meu",
+            "link": "shopify://collections/mais-vendidos"
           }
         }
       },
       "block_order": [
-        "p1"
+        "p1",
+        "p2",
+        "p3"
       ]
     },
     "new": {
