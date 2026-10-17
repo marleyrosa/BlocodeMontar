@@ -104,14 +104,16 @@
           "type": "tile",
           "settings": {
             "collection": "filmes-e-herois",
-            "title": "Filmes e heróis"
+            "title": "Filmes e heróis",
+            "image_asset": "categoria-filmes-e-herois.webp"
           }
         },
         "t2": {
           "type": "tile",
           "settings": {
             "collection": "veiculos",
-            "title": "Veículos"
+            "title": "Veículos",
+            "image_asset": "categoria-veiculos.webp"
           }
         },
         "t3": {
@@ -141,12 +143,21 @@
             "collection": "acessorios",
             "title": "Acessórios"
           }
+        },
+        "tg": {
+          "type": "tile",
+          "settings": {
+            "collection": "games",
+            "title": "Games",
+            "image_asset": "categoria-games.webp"
+          }
         }
       },
       "block_order": [
         "t0",
         "t1",
         "t2",
+        "tg",
         "t3",
         "t4",
         "t5",
