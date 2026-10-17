@@ -18,25 +18,14 @@
         "s1": {
           "type": "slide",
           "settings": {
-            "heading": "Monte sua coleção",
-            "text": "Réplicas de Fórmula 1, veículos e muito mais",
-            "button_label": "Ver lançamentos",
-            "link": "shopify://collections/lancamentos"
-          }
-        },
-        "s2": {
-          "type": "slide",
-          "settings": {
-            "heading": "Comece por aqui",
-            "text": "Kits iniciantes com preço especial",
-            "button_label": "Ver kits",
-            "link": "shopify://collections/comece-sua-colecao"
+            "image_asset": "banner-pedido-completo.jpg",
+            "alt": "Seu pedido ainda mais completo: em compras acima de R$ 499 você ganha um brinde. 10% off no Pix, 6x sem juros e 10% de cashback.",
+            "link": "shopify://collections/all"
           }
         }
       },
       "block_order": [
-        "s1",
-        "s2"
+        "s1"
       ]
     },
     "help": {
