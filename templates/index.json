@@ -77,7 +77,8 @@
           "type": "tile",
           "settings": {
             "collection": "formula-1",
-            "title": "Fórmula 1"
+            "title": "Fórmula 1",
+            "image_asset": "categoria-formula-1.webp"
           }
         },
         "t1": {
